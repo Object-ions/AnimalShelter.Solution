@@ -6,7 +6,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Updated code below!
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
