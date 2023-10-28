@@ -79,5 +79,21 @@ namespace AnimalShelterApi.Controllers
     {
       return _db.Cats.Any(e => e.CatId == id);
     }
+
+    // DELETE api/cats/5
+    [HttpDelete("{id}")]
+    public async Task<IACtionResult> DeleteCat(int id)
+    {
+      Cat cat = await _db.Cats.FindAsync(id);
+      if (cat == null)
+      {
+        return NotFound();
+      }
+      
+      _db.Cats.Remove(cat);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
   }
 }

@@ -45,7 +45,7 @@ namespace AnimalShelterApi.Controllers
       return CreatedAtAction(nameof(GetDog), new { id = dog.DogId }, dog);
     }
 
-    // PUT: api/Dogs/5
+    // PUT api/dogs/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutDog(int id, Dog dog)
     {
@@ -78,6 +78,22 @@ namespace AnimalShelterApi.Controllers
     private bool DogExists(int id)
     {
       return _db.Dogs.Any(e => e.DogId == id);
+    }
+
+    // DELETE api/dogs/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDeg(int id)
+    {
+      Dog dog = await _db.Dogs.FindAsync(id);
+      if (dog == null)
+      {
+        return NotFound();
+      }
+
+      _db.Dogs.Remove(dog);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
     }
   }
 }
