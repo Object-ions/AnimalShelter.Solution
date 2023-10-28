@@ -51,7 +51,22 @@ namespace AnimalShelterApi.Controllers
         query = query.Where(e => e.Personality == personality);
       }
 
-      return await query.ToListAsync();
+      int totalCount = query.Count();
+
+      var skipAmount = (pageIndex - 1) * pageSize;
+      query = query.Skip(skipAmount).Take(pageSize);
+
+      var dogs = await query.ToListAsync();
+
+      var response = new {
+        totalCount = totalCount,
+        pageSize = pageSize,
+        currentPage = pageIndex,
+        totalPages = (int)Math.Ceiling((double)totalCount / pageSize),
+        dogs = dogs
+      };
+
+      return Ok(response);
     }
 
     // GET api/dogs/5
