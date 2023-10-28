@@ -12,20 +12,20 @@ namespace AnimalShelterApi.Models
     public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
     public List<T> Items { get; set; }
   }
-}
 
-public static class PaginationHelper
-{
-  public static Pagination<T> Paging<T>(IQueryable<T> query, int pageIndex = 1, int pageSize = 10)
+  public static class PaginationHelper
   {
-    var result = new Pagination<T>
+    public static Pagination<T> Paging<T>(IQueryable<T> query, int pageIndex = 1, int pageSize = 10)
     {
-      TotalCount = query.Count(),
-      PageSize = pageSize,
-      CurrentPage = pageIndex,
-      Items = query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList()
-    };
+      var result = new Pagination<T>
+      {
+        TotalCount = query.Count(),
+        PageSize = pageSize,
+        CurrentPage = pageIndex,
+        Items = query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList()
+      };
 
-    return result;
+      return result;
+    }
   }
 }
