@@ -19,7 +19,14 @@ namespace AnimalShelterApi.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Cat>>> Get(string Name, string Sex, int Age, string Personality)
     {
-      return await _db.Cats.ToListAsync();
+      IQueryable<Cat> query = _db.Cats.AsQueryable();
+
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name == name);
+      }
+
+      return await query.ToListAsync();
     }
 
     // GET api/cats/5
