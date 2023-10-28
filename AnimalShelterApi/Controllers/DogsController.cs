@@ -36,6 +36,16 @@ namespace AnimalShelterApi.Controllers
         query = query.Where(e => e.Age == age);
       }
 
+      if (minAge > 0)
+      {
+        query = query.Where(e => e.Age >= minAge);
+      }
+
+      if (maxAge != 0)
+      {
+        query = query.Where(e => e.Age <= maxAge);
+      }
+
       if (personality != null)
       {
         query = query.Where(e => e.Personality == personality);
