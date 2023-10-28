@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AnimalShelterApi.Models
 {
-  public class Cat
+  public class Dog
   {
-    public int CatId { get; set; }
+    public int DogId { get; set; }
     [Required]
     public string Name { get; set; }
     [Required]
