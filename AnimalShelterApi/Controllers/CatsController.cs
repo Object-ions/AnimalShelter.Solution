@@ -17,7 +17,7 @@ namespace AnimalShelterApi.Controllers
 
     // GET api/cats
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cat>>> Get(string name, string sex, int age, string personality, int minAge, int maxAge, int pageIndex = 1, int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<Cat>>> Get(string name, string sex, int age, string personality, int minAge, int maxAge, int pageIndex, int pageSize)
     {
       IQueryable<Cat> query = _db.Cats.AsQueryable();
 
@@ -51,22 +51,9 @@ namespace AnimalShelterApi.Controllers
         query = query.Where(e => e.Personality == personality);
       }
 
-      int totalCount = query.Count();
+      var paginatedResults = PaginationHelper.Paging(query, pageIndex, pageSize);
 
-      var skipAmount = (pageIndex - 1) * pageSize;
-      query = query.Skip(skipAmount).Take(pageSize);
-
-      var cats = await query.ToListAsync();
-
-      var response = new {
-        totalCount = totalCount,
-        pageSize = pageSize,
-        currentPage = pageIndex,
-        totalPages = (int)Math.Ceiling((double)totalCount / pageSize),
-        cats = cats
-      };
-
-      return Ok(response);
+      return Ok(paginatedResults);
     }
 
     // GET api/cats/5
