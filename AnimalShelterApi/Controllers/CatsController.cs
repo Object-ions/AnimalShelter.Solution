@@ -82,7 +82,7 @@ namespace AnimalShelterApi.Controllers
 
     // DELETE api/cats/5
     [HttpDelete("{id}")]
-    public async Task<IACtionResult> DeleteCat(int id)
+    public async Task<IActionResult> DeleteCat(int id)
     {
       Cat cat = await _db.Cats.FindAsync(id);
       if (cat == null)
