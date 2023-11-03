@@ -21,6 +21,7 @@ A web Api that allows the user to make API calls in order to check the database.
    - [Pagination Info](#pagination-info)
    - [Endpoints](#endpoints)
      - [HTTP Request Structure](#http-request-structure)
+     - [Parameters](#parameters)
    - [Sample Data](#sample-data)
      - [Dogs](#dogs)
      - [Cats](#cats)
@@ -53,9 +54,13 @@ A web Api that allows the user to make API calls in order to check the database.
 
 1. Follow the instructions on this <a href="https://old.learnhowtoprogram.com/c-and-net/getting-started-with-c/installing-and-configuring-mysql">page</a> for installing and configuring MySQL.
 2. Installing dotnet-ef:
+
    > ```bash
    > $ dotnet tool install --global dotnet-ef --version 6.0.0
    > ```
+
+3. Install Postman
+   (Optional) [Download and install Postman](https://www.postman.com/downloads/).
 
 #### Cloning the Repo:
 
@@ -118,23 +123,43 @@ In the command line in the project's production directory `AnimalShelterApi`, en
 
 To access the API endpoints, utilize tools like a browser, Postman, or Swagger.
 
-With Swagger, go to either https://localhost:5001/swagger/index.html or http://localhost:5000/swagger/index.html.
+(If working with Swagger, go to either https://localhost:5001/swagger/index.html or http://localhost:5000/swagger/index.html.)
 
 #### Pagination Info
+
+The API supports pagination for listing endpoints. Pagination allows you to retrieve a subset of records, making it efficient for large datasets.
+
+- pageIndex: Indicates the current page number. Starts at 0.
+- pageSize: Defines the number of records per page.
+
+Example: To retrieve the second page of dogs with 10 dogs per page, use:
+GET /api/dogs?pageIndex=1&pageSize=10
+
+If pagination is not defined in the request, default values will be used.
 
 ## Endpoints
 
 #### HTTP Request Structure
 
-| Request Type |        Path         |
-| :----------: | :-----------------: |
-|     GET      |   /api/{animals}    |
-|     GET      | /api/{animals}/{id} |
-|     POST     |   /api/{animals}    |
-|     PUT      | /api/{animals}/{id} |
-|    DELETE    | /api/{animals}/{id} |
+| Request Type |        Path         | Description                                | Parameters                                       |
+| :----------: | :-----------------: | ------------------------------------------ | ------------------------------------------------ |
+|     GET      |   /api/{animals}    | Retrieves a list of animals.               | name, sex, age, personality, pageIndex, pageSize |
+|     GET      | /api/{animals}/{id} | Retrieves a specific animal by its ID.     | None                                             |
+|     POST     |   /api/{animals}    | Creates a new animal entry.                | Request body contains animal details.            |
+|     PUT      | /api/{animals}/{id} | Updates an existing animal entry by ID.    | Request body contains updated details.           |
+|    DELETE    | /api/{animals}/{id} | Deletes a specific animal entry by its ID. | None                                             |
 
 The endpoints valid for both `dogs` and `cats`. Replace {animals} with either `dogs` or `cats` (note to use plural). All enpoint for cats will be similar in structure to those for dogs and vice versa.
+
+- **Parameters**:
+  - `name` (optional): Filter dogs by name.
+  - `sex` (optional): Filter dogs by sex (e.g., male or female).
+  - `age` (optional): Filter dogs by age.
+  - `personality` (optional): Filter dogs by personality (e.g., playful, loyal).
+  - `minAge` and `maxAge` (optional): Define a range for dog's age.
+  - `pageIndex` and `pageSize` (optional): Define pagination parameters.
+
+Example Request: `GET /api/dogs?name=Bella&sex=female`
 
 ## Sample Data
 
@@ -196,7 +221,7 @@ https://localhost:5001/api/Cats?sex=female
 
 ## Known Bugs
 
-- No known bugs.
+- Pagination for listing endpoints might not reflect accurate results in some scenarios. Work in progress.
 
 ## License
 
