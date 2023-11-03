@@ -17,9 +17,9 @@ namespace AnimalShelterApi.Controllers
 
     // GET api/dogs
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Dog>>> Get(string name, string sex, int age, string personality, int minAge, int maxAge, int pageIndex, int pageSize)
+    public async Task<ActionResult<Pagination<Dog>>> Get(string name, string sex, int age, string personality, int minAge, int maxAge, int pageIndex = 1, int pageSize = 10)
     {
-       IQueryable<Dog> query = _db.Dogs.AsQueryable();
+      IQueryable<Dog> query = _db.Dogs.AsQueryable();
 
       if (name != null)
       {
@@ -51,9 +51,9 @@ namespace AnimalShelterApi.Controllers
         query = query.Where(e => e.Personality == personality);
       }
 
-      var results = await query.ToListAsync();
-      
-      return Ok(results);
+      var pagedResults = PaginationHelper.Paging(query, pageIndex, pageSize);
+
+      return Ok(pagedResults);
     }
 
     // GET api/dogs/5

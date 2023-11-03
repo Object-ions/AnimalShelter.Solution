@@ -13,6 +13,11 @@ namespace AnimalShelterApi.Models
     public List<T> Items { get; set; }
   }
 
+  public class PaginationSettings
+  {
+    public int DefaultPageSize { get; set; }
+  }
+
   public static class PaginationHelper
   {
     public static Pagination<T> Paging<T>(IQueryable<T> query, int pageIndex = 1, int pageSize = 10)
