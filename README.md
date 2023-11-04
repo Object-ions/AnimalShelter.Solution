@@ -129,7 +129,7 @@ To access the API endpoints, utilize tools like a browser, Postman, or Swagger.
 
 The API supports pagination for listing endpoints. Pagination allows you to retrieve a subset of records, making it efficient for large datasets.
 
-- pageIndex: Indicates the current page number. Starts at 0.
+- pageIndex: Indicates the current page number. Starts at 1.
 - pageSize: Defines the number of records per page.
 
 Example: To retrieve the second page of dogs with 10 dogs per page, use:
@@ -165,19 +165,19 @@ Example Request: `GET /api/dogs?name=Bella&sex=female`
 
 ### Dogs
 
-| DogId | Name  | Sex    | Age | Personality |
-| ----- | ----- | ------ | --- | ----------- |
-| 1     | Bella | Female | 7   | Playful     |
-| 2     | Max   | Female | 10  | Loyal       |
-| ...   | ...   | ...    | ... | ...         |
+| DogId | Name (required) | Sex (required) | Age (required) | Personality (optional) |
+| ----- | --------------- | -------------- | -------------- | ---------------------- |
+| 1     | Bella           | Female         | 7              | Playful                |
+| 2     | Max             | Female         | 10             | Loyal                  |
+| ...   | ...             | ...            | ...            | ...                    |
 
 ### Cats
 
-| CatId | Name     | Sex    | Age | Personality  |
-| ----- | -------- | ------ | --- | ------------ |
-| 1     | Whiskers | Male   | 7   | Independent  |
-| 2     | Oliver   | Female | 10  | Affectionate |
-| ...   | ...      | ...    | ... | ...          |
+| CatId | Name (required) | Sex (required) | Age (required) | Personality (optional) |
+| ----- | --------------- | -------------- | -------------- | ---------------------- |
+| 1     | Whiskers        | Male           | 7              | Independent            |
+| 2     | Oliver          | Female         | 10             | Affectionate           |
+| ...   | ...             | ...            | ...            | ...                    |
 
 \*\* Note that `Age` represented in months and noth years.
 
@@ -199,29 +199,44 @@ The concept of 'personality' can be subjective and open to interpretation. To ma
 
 ## Examples
 
-#### Sample JSON Response
+#### Example Queries
+
+The following query will return the 3rd and 4th cats from the dataset.
+
+```
+https://localhost:5001/api/Cats?pageIndex=2&pageSize=2
+```
+
+#### Sample JSON Response from the above query
 
 ```json
 {
-  "catId": 1,
-  "name": "Whiskers",
-  "sex": "Male",
-  "age": 7,
-  "personality": "Independent"
+  "totalCount": 6,
+  "pageSize": 2,
+  "currentPage": 2,
+  "totalPages": 3,
+  "items": [
+    {
+      "catId": 3,
+      "name": "Charlie",
+      "sex": "Male",
+      "age": 2,
+      "personality": "Adventurous"
+    },
+    {
+      "catId": 4,
+      "name": "Daisy",
+      "sex": "Female",
+      "age": 4,
+      "personality": "Lazy"
+    }
+  ]
 }
-```
-
-#### Example Queries
-
-The following query will return all female cats.
-
-```
-https://localhost:5001/api/Cats?sex=female
 ```
 
 ## Known Bugs
 
-- Pagination for listing endpoints might not reflect accurate results in some scenarios. Work in progress.
+- No known bugs.
 
 ## License
 
@@ -234,3 +249,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+- If you detect any bug in the program, please reach out to me at [moshikoatia@gmail.com](mailto:moshikoatia@gmail.com).
