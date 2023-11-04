@@ -179,7 +179,7 @@ Example Request: `GET /api/dogs?name=Bella&sex=female`
 | 2     | Oliver          | Female         | 10             | Affectionate           |
 | ...   | ...             | ...            | ...            | ...                    |
 
-\*\* Note that `Age` represented in months and noth years.
+\*\* Note that `Age` represented in months and not years.
 
 ### Note on `Personality`
 
