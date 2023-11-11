@@ -141,23 +141,31 @@ If pagination is not defined in the request, default values will be used.
 
 #### HTTP Request Structure
 
-| Request Type |        Path         | Description                                | Parameters                                       |
-| :----------: | :-----------------: | ------------------------------------------ | ------------------------------------------------ |
-|     GET      |   /api/{animals}    | Retrieves a list of animals.               | name, sex, age, personality, pageIndex, pageSize |
-|     GET      | /api/{animals}/{id} | Retrieves a specific animal by its ID.     | None                                             |
-|     POST     |   /api/{animals}    | Creates a new animal entry.                | Request body contains animal details.            |
-|     PUT      | /api/{animals}/{id} | Updates an existing animal entry by ID.    | Request body contains updated details.           |
-|    DELETE    | /api/{animals}/{id} | Deletes a specific animal entry by its ID. | None                                             |
+| Request Type |        Path         | Description                                | Parameters                                                              |
+| :----------: | :-----------------: | ------------------------------------------ | ----------------------------------------------------------------------- |
+|     GET      |   /api/{animals}    | Retrieves a list of animals.               | name, sex, age, personality, pageIndex, pageSize (all optional)         |
+|     GET      | /api/{animals}/{id} | Retrieves a specific animal by its ID.     | None                                                                    |
+|     POST     |   /api/{animals}    | Creates a new animal entry.                | name (required), sex (required), age (required), personality (optional) |
+|     PUT      | /api/{animals}/{id} | Updates an existing animal entry by ID.    | name (required), sex (required), age (required), personality (optional) |
+|    DELETE    | /api/{animals}/{id} | Deletes a specific animal entry by its ID. | None                                                                    |
 
 The endpoints valid for both `dogs` and `cats`. Replace {animals} with either `dogs` or `cats` (note to use plural). All enpoint for cats will be similar in structure to those for dogs and vice versa.
 
-- **Parameters**:
-  - `name` (optional): Filter dogs by name.
-  - `sex` (optional): Filter dogs by sex (e.g., male or female).
-  - `age` (optional): Filter dogs by age.
-  - `personality` (optional): Filter dogs by personality (e.g., playful, loyal).
-  - `minAge` and `maxAge` (optional): Define a range for dog's age.
-  - `pageIndex` and `pageSize` (optional): Define pagination parameters.
+- **Parameters for GET (Filtering)**:
+
+- `name`: Filter animals by name.
+- `sex`: Filter animals by sex (e.g., male or female).
+- `age`: Filter animals by age.
+- `personality`: Filter animals by personality (e.g., playful, loyal).
+- `minAge` and `maxAge`: Define a range for the animal's age.
+- `pageIndex` and `pageSize`: Define pagination parameters.
+
+- **Parameters for POST and PUT**:
+
+- `name` (required): Name of the animal.
+- `sex` (required): Sex of the animal.
+- `age` (required): Age of the animal.
+- `personality` (optional): Personality of the animal.
 
 Example Request: `GET /api/dogs?name=Bella&sex=female`
 
@@ -232,6 +240,73 @@ https://localhost:5001/api/Cats?pageIndex=2&pageSize=2
     }
   ]
 }
+```
+
+### Example Requests for Each Type of API Call
+
+#### GET (Retrieve List of Animals)
+
+```
+GET /api/dogs
+GET /api/cats
+```
+
+Parameters like `name`, `sex`, `age`, `personality`, `pageIndex`, and `pageSize` can be used for filtering.
+
+#### GET (Retrieve Specific Animal by ID)
+
+```
+GET /api/dogs/{id}
+GET /api/cats/{id}
+```
+
+#### POST (Create a New Animal)
+
+```
+POST /api/dogs
+POST /api/cats
+```
+
+JSON body example for POST request:
+
+```json
+{
+  "name": "Luna",
+  "sex": "Female",
+  "age": 5,
+  "personality": "Playful"
+}
+```
+
+The `name`, `sex`, and `age` fields are required.
+
+#### PUT (Update an Existing Animal by ID)
+
+```
+PUT /api/dogs/{id}
+PUT /api/cats/{id}
+```
+
+Include the `id` in the URL and the updated data in the JSON body. The `id` in the URL identifies the animal to update, and the JSON body contains the updated information.
+
+JSON body example for PUT request:
+
+```json
+{
+  "name": "Luna",
+  "sex": "Female",
+  "age": 6,
+  "personality": "Adventurous"
+}
+```
+
+The `name`, `sex`, and `age` fields are required in the JSON body.
+
+#### DELETE (Delete a Specific Animal by ID)
+
+```
+DELETE /api/dogs/{id}
+DELETE /api/cats/{id}
 ```
 
 ## Known Bugs
