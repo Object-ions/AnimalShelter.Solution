@@ -2,22 +2,27 @@
 
 #### By Moshe Atia Poston
 
+## [Live Demo](#live)
+
+Check out the API UI with 'Swagger' on this [link ](https://animal-shelter-api.onrender.com/)
+
 ## Description
 
 A web Api that allows the user to make API calls in order to check the database. The user can create, remove, update, and see detailed information about the animals in the animal shelter.
 
 ## Table of Contents
 
-1. [Description](#description)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Setup/Installation Requirements](#setupinstallation-requirements)
+1. [Live Demo](#live)
+2. [Description](#description)
+3. [Features](#features)
+4. [Technologies Used](#technologies-used)
+5. [Setup/Installation Requirements](#setupinstallation-requirements)
    - [Required Technology](#required-technology)
    - [Cloning the Repo](#cloning-the-repo)
    - [Set up a Connection String to Database](#set-up-a-connection-string-to-database)
    - [Create the Database](#create-the-database)
-5. [Launching the API](#launching-the-api)
-6. [Using API](#using-api)
+6. [Launching the API](#launching-the-api)
+7. [Using API](#using-api)
    - [Pagination Info](#pagination-info)
    - [Endpoints](#endpoints)
      - [HTTP Request Structure](#http-request-structure)
@@ -29,8 +34,8 @@ A web Api that allows the user to make API calls in order to check the database.
    - [Examples](#examples)
      - [Sample JSON Response](#sample-json-response)
      - [Example Queries](#example-queries)
-7. [Known Bugs](#known-bugs)
-8. [License](#license)
+8. [Known Bugs](#known-bugs)
+9. [License](#license)
 
 ## Features
 
