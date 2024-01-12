@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnimalShelterApi.Migrations
 {
     [DbContext(typeof(AnimalShelterApiContext))]
-    [Migration("20231028201139_AddModelValidation")]
-    partial class AddModelValidation
+    [Migration("20240112004826_InitMigrationsWithCloudDatabase")]
+    partial class InitMigrationsWithCloudDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
